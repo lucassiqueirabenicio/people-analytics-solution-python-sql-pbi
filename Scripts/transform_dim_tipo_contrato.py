@@ -5,46 +5,48 @@ import openpyxl
 import os
 
 # 2 - Lendo arquivo dim_tipo_contrato
+def executar_transform_dim_tipo_contrato():
 
-DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
+    DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 
-input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_tipo_contrato.parquet")
+    input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_tipo_contrato.parquet")
 
-output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
+    output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
 
-df = pd.read_parquet(input_path)
+    df = pd.read_parquet(input_path)
 
-df
+    df
 
-# 3 - Renomeando colunas
+    # 3 - Renomeando colunas
 
-df = df.rename(columns={'Cód T. Contrato': 'cod_tipo_contrato', 
-                        'Tipo Contrato': 'tipo_contrato',})
+    df = df.rename(columns={'Cód T. Contrato': 'cod_tipo_contrato', 
+                            'Tipo Contrato': 'tipo_contrato',})
 
-# 4 - Tipando as colunas do data frame
+    # 4 - Tipando as colunas do data frame
 
-tipos = { 
-    'cod_tipo_contrato': 'Int64',
-    'tipo_contrato': 'string',
-}
+    tipos = { 
+        'cod_tipo_contrato': 'Int64',
+        'tipo_contrato': 'string',
+    }
 
-df = df.astype(tipos)
+    df = df.astype(tipos)
 
-# 5 - Garantir que os IDs das situações sempre sejam numéricos 
+    # 5 - Garantir que os IDs das situações sempre sejam numéricos 
 
-df['cod_tipo_contrato'] = pd.to_numeric(df['cod_tipo_contrato'], errors='coerce')
+    df['cod_tipo_contrato'] = pd.to_numeric(df['cod_tipo_contrato'], errors='coerce')
 
-# 6 - Padronizando os dados do tipo string para maíusculo
+    # 6 - Padronizando os dados do tipo string para maíusculo
 
-colunas_texto = df.select_dtypes(include=['string']).columns
+    colunas_texto = df.select_dtypes(include=['string']).columns
 
-for col in colunas_texto:
-    df[col] = df[col].str.upper().str.strip()
+    for col in colunas_texto:
+        df[col] = df[col].str.upper().str.strip()
 
-df
+    df
 
-# 7 - Enviando dim_tipo_contrato tratada para a camada silver
+    # 7 - Enviando dim_tipo_contrato tratada para a camada silver
 
-df.to_parquet(os.path.join(output_path, "dim_tipo_contrato.parquet"), index=False)
+    df.to_parquet(os.path.join(output_path, "dim_tipo_contrato.parquet"), index=False)
 
-
+if __name__ == "__main__":
+    executar_transform_dim_tipo_contrato()

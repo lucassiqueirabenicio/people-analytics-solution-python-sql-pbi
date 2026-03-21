@@ -6,47 +6,49 @@ import os
 
 # 2 - Lendo arquivo dim_situacao
 
-DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
+def executar_transform_dim_situacao():
 
-input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_situacao.parquet")
+    DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 
-output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
+    input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_situacao.parquet")
 
-df = pd.read_parquet(input_path)
+    output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
 
-df
+    df = pd.read_parquet(input_path)
 
-# 3 - Renomeando colunas
+    df
 
-df = df.rename(columns={'Cód Situação': 'cod_situacao', 
-                        'Situação': 'situacao',})
+    # 3 - Renomeando colunas
 
-# 4 - Tipando as colunas do data frame e tratando datas fora do padrão
+    df = df.rename(columns={'Cód Situação': 'cod_situacao', 
+                            'Situação': 'situacao',})
 
-tipos = { 
-    'cod_situacao': 'Int64',
-    'situacao': 'string',
-}
+    # 4 - Tipando as colunas do data frame e tratando datas fora do padrão
 
-df = df.astype(tipos)
+    tipos = { 
+        'cod_situacao': 'Int64',
+        'situacao': 'string',
+    }
 
-# 5 - Garantir que os IDs das situações sempre sejam numéricos 
+    df = df.astype(tipos)
 
-df['cod_situacao'] = pd.to_numeric(df['cod_situacao'], errors='coerce')
+    # 5 - Garantir que os IDs das situações sempre sejam numéricos 
 
-# 6 - Padronizando os dados do tipo string para maíusculo
+    df['cod_situacao'] = pd.to_numeric(df['cod_situacao'], errors='coerce')
 
-colunas_texto = df.select_dtypes(include=['string']).columns
+    # 6 - Padronizando os dados do tipo string para maíusculo
 
-for col in colunas_texto:
-    df[col] = df[col].str.upper().str.strip()
+    colunas_texto = df.select_dtypes(include=['string']).columns
 
-df
+    for col in colunas_texto:
+        df[col] = df[col].str.upper().str.strip()
 
-# %% [markdown]
-# 7 - Enviando dim_situacao tratada para a camada silver
+    df
 
-# %%
-df.to_parquet(os.path.join(output_path, "dim_situacao.parquet"), index=False)
+    # 7 - Enviando dim_situacao tratada para a camada silver
 
+    df.to_parquet(os.path.join(output_path, "dim_situacao.parquet"), index=False)
+
+if __name__ == "__main__":
+    executar_transform_dim_situacao()
 

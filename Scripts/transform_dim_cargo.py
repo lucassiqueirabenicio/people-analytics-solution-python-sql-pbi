@@ -5,47 +5,51 @@ import openpyxl
 import os
 
 # 2 - Lendo arquivo dim_cargo.parquet
-DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
+def executar_transform_dim_cargo():
 
-input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_cargo.parquet")
+    DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 
-output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
+    input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_cargo.parquet")
 
-df = pd.read_parquet(input_path)
+    output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
 
-df
+    df = pd.read_parquet(input_path)
 
-# 3 - Renomeando colunas
+    df
 
-df = df.rename(columns={'Cód Cargo': 'cod_cargo', 
-                        'Cargo': 'cargo',
-                      })
+    # 3 - Renomeando colunas
 
-# 4 - Tipando as colunas do data frame
+    df = df.rename(columns={'Cód Cargo': 'cod_cargo', 
+                            'Cargo': 'cargo',
+                        })
 
-tipos = { 
-    'cod_cargo': 'Int64',
-    'cargo': 'string',
+    # 4 - Tipando as colunas do data frame
 
-}
+    tipos = { 
+        'cod_cargo': 'Int64',
+        'cargo': 'string',
 
-df = df.astype(tipos)
+    }
 
-# 5 - Garantir que os IDs dos cargos sempre sejam numéricos 
+    df = df.astype(tipos)
 
-df['cod_cargo'] = pd.to_numeric(df['cod_cargo'], errors='coerce')
+    # 5 - Garantir que os IDs dos cargos sempre sejam numéricos 
 
-# 6 - Padronizando os dados do tipo string para maiúsculo
+    df['cod_cargo'] = pd.to_numeric(df['cod_cargo'], errors='coerce')
 
-colunas_texto = df.select_dtypes(include=['string']).columns
+    # 6 - Padronizando os dados do tipo string para maiúsculo
 
-for col in colunas_texto:
-    df[col] = df[col].str.upper().str.strip()
+    colunas_texto = df.select_dtypes(include=['string']).columns
 
-df
+    for col in colunas_texto:
+        df[col] = df[col].str.upper().str.strip()
 
-# 7 - Enviando dim_cargo para a camada silver
+    df
 
-df.to_parquet(os.path.join(output_path, "dim_cargo.parquet"), index=False)
+    # 7 - Enviando dim_cargo para a camada silver
+
+    df.to_parquet(os.path.join(output_path, "dim_cargo.parquet"), index=False)
 
 
+if __name__ == "__main__":
+    executar_transform_dim_cargo()

@@ -5,35 +5,37 @@ import openpyxl
 import os
 
 # 2 - Lendo arquivo dim_centro_custo.parquet
+def executar_transform_centro_custo():
+    
+    DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 
-DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
+    input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_centro_custo.parquet")
 
-input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_centro_custo.parquet")
+    output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
 
-output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
+    df = pd.read_parquet(input_path)
 
-df = pd.read_parquet(input_path)
+    df
 
-df
+    # 3 - Renomeando colunas
 
-# 3 - Renomeando colunas
+    df = df.rename(columns={'Cód C.Custo': 'cod_centro_custo', 
+                            'Centro Custo': 'centro_custo',
+                        })
 
-df = df.rename(columns={'Cód C.Custo': 'cod_centro_custo', 
-                        'Centro Custo': 'centro_custo',
-                      })
+    # 4 - Tipando as colunas do data frame
 
-# 4 - Tipando as colunas do data frame
+    tipos = { 
+        'cod_centro_custo': 'string',
+        'centro_custo': 'string',
 
-tipos = { 
-    'cod_centro_custo': 'string',
-    'centro_custo': 'string',
+    }
 
-}
+    df = df.astype(tipos)
 
-df = df.astype(tipos)
+    # 5 - Envindo dim_centro_custo para a camada silver
 
-# 5 - Envindo dim_centro_custo para a camada silver
+    df.to_parquet(os.path.join(output_path, "dim_centro_custo.parquet"), index=False)
 
-df.to_parquet(os.path.join(output_path, "dim_centro_custo.parquet"), index=False)
-
-
+if __name__ == "__main__":
+    executar_transform_centro_custo()
