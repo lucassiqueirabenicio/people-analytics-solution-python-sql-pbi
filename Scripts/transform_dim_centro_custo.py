@@ -6,9 +6,11 @@ import os
 
 # 2 - Lendo arquivo dim_centro_custo.parquet
 
-input_path = "../Data/2 - Bronze/dim_centro_custo.parquet"
-output_path = "../Data/3 - Silver"
+DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 
+input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_centro_custo.parquet")
+
+output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
 
 df = pd.read_parquet(input_path)
 

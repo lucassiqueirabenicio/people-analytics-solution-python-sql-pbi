@@ -7,10 +7,16 @@ import glob
 
 # 2 - Lendo Arquivo Contratos.xlsx
 
-input_path = "../Data/1 - Raw/Contratos/Contratos.xlsx"
-output_path = "../Data/2 - Bronze"
+DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 
-df_bruto = pd.read_excel(input_path, dtype=str)
+input_path_contratos = os.path.join(DIRETORIO_ATUAL, "..", "Data", "1 - Raw", "Contratos", "Contratos.xlsx")
+
+input_path_ficha_financeira = os.path.join(DIRETORIO_ATUAL, "..", "Data", "1 - Raw", "Ficha Financeira")
+
+output_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze")
+
+
+df_bruto = pd.read_excel(input_path_contratos, dtype=str)
 
 # 3 - Data Frame contratos bruto
 
@@ -83,8 +89,6 @@ dim_tipo_contrato.to_parquet(os.path.join(output_path, "dim_tipo_contrato.parque
 fato_contrato.to_parquet(os.path.join(output_path, "fato_contrato.parquet"), index=False)
 
 # 12 - Lendo pasta Ficha Financeira, onde os arquivos de ficha financeira estão.
-
-input_path_ficha_financeira = "../Data/1 - Raw/Ficha Financeira"
 
 padrao_busca = os.path.join(input_path_ficha_financeira, '*.csv') #Definindo uma regra para a busca dos arquvios csv
 

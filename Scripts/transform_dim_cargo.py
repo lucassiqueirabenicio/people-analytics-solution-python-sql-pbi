@@ -5,9 +5,11 @@ import openpyxl
 import os
 
 # 2 - Lendo arquivo dim_cargo.parquet
+DIRETORIO_ATUAL = os.path.dirname(os.path.abspath(__file__))
 
-input_path = "../Data/2 - Bronze/dim_cargo.parquet"
-output_path = "../Data/3 - Silver"
+input_path = os.path.join(DIRETORIO_ATUAL, "..", "Data", "2 - Bronze", "dim_cargo.parquet")
+
+output_path = os.path.join(DIRETORIO_ATUAL, "..","Data", "3 - Silver")
 
 df = pd.read_parquet(input_path)
 
