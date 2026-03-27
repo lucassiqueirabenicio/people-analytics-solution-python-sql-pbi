@@ -31,20 +31,22 @@ def rodar_pipeline():
 
         # --- FASE 2: DIMENSÕES (BRONZE -> SILVER) ---
         print("\n[FASE 2/3] Processando Dimensões (Camada Silver)...")
-        transform_dim_funcionario.executar_transform_dim_funcionario
-        transform_dim_cargo.executar_transform_dim_cargo
-        transform_dim_centro_custo.executar_transform_centro_custo   
-        transform_dim_escala.executar_transform_dim_escala
-        transform_dim_situacao.executar_transform_dim_situacao
-        transform_dim_tipo_contrato.executar_transform_dim_tipo_contrato
+        transform_dim_funcionario.executar_transform_dim_funcionario()
+        transform_dim_cargo.executar_transform_dim_cargo()
+        transform_dim_centro_custo.executar_transform_centro_custo()   
+        transform_dim_escala.executar_transform_dim_escala()
+        transform_dim_situacao.executar_transform_dim_situacao()
+        transform_dim_tipo_contrato.executar_transform_dim_tipo_contrato()
+        print("dimensões finalizadas com sucesso")
         
 
         # --- FASE 3: FATOS (BRONZE -> SILVER) ---
         # As fatos sempre rodam por último, pois elas dependem das chaves das dimensões!
         print("\n[FASE 3/3] Processando Fatos (Camada Silver)...")
-        transform_fato_contrato.executar_transform_fato_contrato
-        transform_fato_ficha_financeira.executar_transform_fato_ficha_financeira
-        
+        transform_fato_contrato.executar_transform_fato_contrato()
+        transform_fato_ficha_financeira.executar_transform_fato_ficha_financeira()
+        print("fatos finalizadas com sucesso")
+
         
         # --- SUCESSO ---
         fim_pipeline = time.time()

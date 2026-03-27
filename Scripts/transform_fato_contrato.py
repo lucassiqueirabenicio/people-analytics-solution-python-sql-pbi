@@ -39,6 +39,8 @@ def executar_transform_fato_contrato():
         'cod_centro_custo': 'string',
         'cod_tipo_contrato': 'Int64',
         'cod_situacao': 'Int64',
+        'cod_situacao': 'Int64',
+        'valor_salario': 'float'
     }
 
     df = df.astype(tipos)

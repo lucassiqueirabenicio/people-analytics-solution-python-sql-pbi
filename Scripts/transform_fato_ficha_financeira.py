@@ -35,6 +35,9 @@ def executar_transform_fato_ficha_financeira():
     
     df
 
+    # 4.5 - Tratando a coluna de valor (formato brasileiro para americano)
+    df['valor'] = df['valor'].astype(str).str.replace('.', '', regex=False).str.replace(',', '.', regex=False)
+
     # 5 - Tipando colunas do data frame
 
     tipos = { 
@@ -44,10 +47,10 @@ def executar_transform_fato_ficha_financeira():
         'evento': 'int64',
         'descricao': 'string',
         'tipo': 'string',
-        'valor': 'float',
+        'valor': 'float'
     }
 
-    df
+    df = df.astype(tipos)
 
     # 6 - Garantir que os IDs dos funcionarios sempre sejam numéricos 
 
@@ -68,4 +71,3 @@ def executar_transform_fato_ficha_financeira():
 
 if __name__ == "__main__":
     executar_transform_fato_ficha_financeira()
-

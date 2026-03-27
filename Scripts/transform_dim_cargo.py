@@ -44,7 +44,7 @@ def executar_transform_dim_cargo():
     for col in colunas_texto:
         df[col] = df[col].str.upper().str.strip()
 
-    df
+    df = df.drop_duplicates()
 
     # 7 - Enviando dim_cargo para a camada silver
 
