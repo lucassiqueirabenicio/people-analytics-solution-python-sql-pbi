@@ -25,7 +25,7 @@ Desenhei o fluxo de dados para ser modular, escalável e performático, dividido
 * **Armazenamento:** Apache Parquet (PyArrow)
 * **Análise SQL (OLAP):** DuckDB
 * **Visualização:** Microsoft Power BI
-* **Orquestração:** Script Python Customizado (`orquestrador.py`)
+* **Orquestração:** Script Python Customizado (`main.py`)
 
 ## 📂 Estrutura do Repositório
 
@@ -51,7 +51,33 @@ Desenhei o fluxo de dados para ser modular, escalável e performático, dividido
 1. **Clone o Repositório**
 
 ```text
-git clone [https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git](https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git)
-cd NOME_DO_REPOSITORIO
+git clone [https://github.com/SEU_USUARIOpeople-analytics-solution-python-sql-pbi.git](https://github.com/SEU_USUARIO/people-analytics-solution-python-sql-pbi.git)
 ```
+2. **Instale as Dependências do Projeto**
+
+```text
+pip install -r requirements.txt
+```
+3. **Execute o Orquestrador **
+
+```text
+cd Scripts
+python main.py
+```
+
+4. **Execute as Análises de Negócio (SQL)**
+
+```text
+cd ../Perguntas_de_negocio
+python media_por_escolaridade.py
+```
+
+## 📈 Dashboard no Power BI
+
+
+<img width="1605" height="862" alt="image" src="https://github.com/user-attachments/assets/a53403de-4461-4f82-82a2-105070a41eee" />
+
+[Link para o dashboard](https://app.powerbi.com/view?r=eyJrIjoiZGM2NGE5ZDAtMTkxNS00NzQ0LTk3YmEtM2YxNWZmMzJhNGEwIiwidCI6IjkxMTMxOGI2LTMwYjAtNDY5ZS1iMGE0LTk1OTU0ZjM5MjczMyJ9)
+
+
 
