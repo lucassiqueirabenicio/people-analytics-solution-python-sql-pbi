@@ -30,7 +30,7 @@ Desenhei o fluxo de dados para ser modular, escalável e performático, dividido
 ## 📂 Estrutura do Repositório
 
 ```text
-📦 hr-analytics-pipeline
+📦 people-analytics-solution
  ┣ 📂 Dashboard            # Arquivo do Power BI e os assets usados no dashboard
  ┃  ┗ 📜 people_analytics.pbix
  ┣ 📂 Data
