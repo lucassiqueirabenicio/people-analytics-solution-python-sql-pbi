@@ -1,5 +1,3 @@
-# 📊 Data Engineering & Analytics Pipeline: HR Analytics
-
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
 ![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black)
@@ -8,6 +6,11 @@
 
 ## 📌 Visão Geral do Projeto
 Este projeto é um pipeline de Engenharia de Dados de ponta a ponta focado em dados de Recursos Humanos (HR Analytics). O objetivo foi extrair dados brutos de planilhas .XLSX e .CSV, processá-los aplicando a **Arquitetura Medalhão (Medallion Architecture)** e a **Modelagem Dimensional (Star Schema)**, e finalmente disponibilizá-los para análises de negócios via SQL e dashboard no Power BI.
+
+Segue abaixo o roadmap do projeto de forma visual:
+
+<img width="802" height="432" alt="Gemini_Generated_Image_tb1eottb1eottb1e" src="https://github.com/user-attachments/assets/c5fb16a6-3abd-4fdb-b33b-a82429f24f7d" />
+
 
 ## 🏛️ Arquitetura de Dados
 
@@ -88,5 +91,6 @@ python media_por_escolaridade.py
 * Poder analítico do **DuckDB** para consultar arquivos físicos localmente utilizando SQL puro sem a necessidade de instanciar um servidor de banco de dados.
 * Fortalecimento do meu conhecimento em Storytelling e Visualização de Dados.
 
-
+## Observação
+**Todos** os dados presentes neste projeto são fictícios e para fins de estudo.
 
